@@ -133,8 +133,11 @@ var Engine = (function(global) {
                  * we're using them over and over.
                  */
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                
             }
         }
+        ctx.font="20px Verdana";
+        ctx.fillText("Score: ",10,40);
 
 
         renderEntities();
@@ -181,4 +184,5 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    global.myVariable="Hello";
 })(this);
