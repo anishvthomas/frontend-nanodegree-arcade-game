@@ -13,7 +13,7 @@ var Enemy = function(x,y,speed) {
     this.y=y;
     this.speed = speed;
     
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -55,7 +55,7 @@ Enemy.prototype.render = function() {
 
 Enemy.prototype.reset = function() {
     this.x= -100;
-    this.y = Math.floor(Math.random() * (240 - 55)) + 55;;
+    this.y = Math.floor(Math.random() * (240 - 55)) + 55;
 };
 
 Enemy.prototype.checkColission = function(enemy,player) {
@@ -74,7 +74,7 @@ Enemy.prototype.isColliding = function(enemy,player){
          (enemy.left > player.right) ||
          (enemy.bottom < player.top) ||
          (enemy.top > player.bottom)
-      )  
+      );
   
 };
 // Now write your own player class
@@ -110,28 +110,27 @@ Player.prototype.reset = function() {
 
 Player.prototype.handleInput = function(keyCode)
 {
-    var UPDOWNTICK=83;
-    var SIDETICK=101;
+   
     if(keyCode==="left"){
         
         if(this.x > -2){
-            this.x-=SIDETICK;
+            this.x-=WIDTH;
         }
     }else if (keyCode==="right")
     {
         //right extreme position for player
         if( this.x < 402){
-            this.x+=SIDETICK;
+            this.x+=WIDTH;
         }
 
     }else if (keyCode==="up"){
     
-        this.y-=UPDOWNTICK;
+        this.y-=HEIGHT;
 
     }else if (keyCode==="down"){
          
         if(this.y<430){
-            this.y+=UPDOWNTICK;
+            this.y+=HEIGHT;
         }
             
                 
