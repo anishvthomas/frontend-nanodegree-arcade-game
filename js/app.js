@@ -1,6 +1,6 @@
 // Enemies our player must avoid
 var WIDTH = 101;
-var HEIGHT = 90;
+var HEIGHT = 83;
 var scoretext="Score: ";
 var Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
@@ -30,7 +30,7 @@ Enemy.prototype.update = function(dt) {
         //if score is greater than 3 add more enemies
         if(player.score > 3 )
         {
-            allEnemies.push(new Enemy(100, (Math.floor(Math.random() * (240 - 55)) + 55),60));
+            allEnemies.push(new Enemy(-2, (Math.floor(Math.random() * (240 - 55)) + 55),60));
         }
         //if score is not greater than 3 and there are more than 3 enemies, remove the current one
         else if(allEnemies.length > 3)
@@ -46,17 +46,18 @@ Enemy.prototype.update = function(dt) {
     this.bottom = this.top+HEIGHT;
     this.right= this.left+WIDTH;
     this.checkColission(this,player);
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Enemy.prototype.reset = function() {
     this.x= -100;
     this.y = Math.floor(Math.random() * (240 - 55)) + 55;;
-}
+};
+
 Enemy.prototype.checkColission = function(enemy,player) {
     // body...
     if(this.isColliding(enemy,player)){
@@ -67,6 +68,7 @@ Enemy.prototype.checkColission = function(enemy,player) {
         
     }
 };
+
 Enemy.prototype.isColliding = function(enemy,player){
     return !( (enemy.right < player.left) ||
          (enemy.left > player.right) ||
@@ -74,7 +76,7 @@ Enemy.prototype.isColliding = function(enemy,player){
          (enemy.top > player.bottom)
       )  
   
-}
+};
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -84,7 +86,7 @@ var Player = function(x,y){
     this.y=y;
     this.score=0;
 
-}
+};
 
 Player.prototype.update = function(dt){
    
@@ -99,42 +101,44 @@ Player.prototype.update = function(dt){
     this.bottom = this.top+60;
     this.right= this.left+60;
   
-}
+};
 
 Player.prototype.reset = function() {
     this.x= 200;
     this.y = 430;
-}
+};
 
 Player.prototype.handleInput = function(keyCode)
 {
-    var upspeed=20;
+    var UPDOWNTICK=83;
+    var SIDETICK=101;
     if(keyCode==="left"){
         
-        if(this.x>-5){
-            this.x-=upspeed;
+        if(this.x > -2){
+            this.x-=SIDETICK;
         }
     }else if (keyCode==="right")
     {
         //right extreme position for player
-        if( this.x < 420){
-            this.x+=upspeed;
+        if( this.x < 402){
+            this.x+=SIDETICK;
         }
 
     }else if (keyCode==="up"){
     
-        this.y-=upspeed;
+        this.y-=UPDOWNTICK;
 
     }else if (keyCode==="down"){
          
         if(this.y<430){
-            this.y+=upspeed;
+            this.y+=UPDOWNTICK;
         }
             
                 
     }
 
-}
+};
+
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     ctx.font="20px Verdana";
@@ -143,7 +147,7 @@ Player.prototype.render = function(){
     scoretext="Score: "+this.score;
     ctx.fillStyle='red';
     ctx.fillText(scoretext,10,40);
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
